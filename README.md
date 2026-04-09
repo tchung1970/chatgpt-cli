@@ -48,7 +48,7 @@ $ chatgpt
 Hi Thomas, How can I help you?
 Model: gpt-5.4-mini | Type q to quit
 
-> What's the weather in San Francisco?
+> What's the weather in Los Angeles?
 ```
 
 ### One-shot mode

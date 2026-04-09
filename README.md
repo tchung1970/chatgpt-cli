@@ -43,6 +43,8 @@ A lightweight command-line interface for ChatGPT on macOS, powered by the OpenAI
 
 ### Interactive mode
 
+On first run, you will be prompted to enter your first name. This is saved to `~/.chatgpt-cli.json` and used for the greeting.
+
 ```
 $ chatgpt
 Enter your first name: Thomas
@@ -76,8 +78,6 @@ $ chatgpt "What's the weather in Los Angeles?"
 | `CHATGPT_MODEL`     | `gpt-5.4-mini`  | Model to use         |
 
 Environment variables are loaded from `~/.env` at startup.
-
-On first run, you will be prompted to enter your first name. This is saved to `~/.chatgpt-cli.json` and used for the greeting.
 
 ## License
 

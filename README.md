@@ -1,4 +1,4 @@
-# chatgpt-cli
+# chatgpt-cli-cli
 
 A lightweight command-line interface for ChatGPT on macOS, powered by the OpenAI Responses API with live web search.
 
@@ -19,8 +19,8 @@ A lightweight command-line interface for ChatGPT on macOS, powered by the OpenAI
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/tchung/chatgpt-cli.git
-   cd chatgpt-cli
+   git clone https://github.com/tchung/chatgpt-cli-cli.git
+   cd chatgpt-cli-cli
    ```
 
 2. Install dependencies:
@@ -35,8 +35,8 @@ A lightweight command-line interface for ChatGPT on macOS, powered by the OpenAI
 
 4. Make the script executable and optionally add it to your PATH:
    ```bash
-   chmod +x chatgpt
-   ln -s "$(pwd)/chatgpt" /usr/local/bin/chatgpt
+   chmod +x chatgpt-cli
+   ln -s "$(pwd)/chatgpt-cli" /usr/local/bin/chatgpt-cli
    ```
 
 ## Usage
@@ -44,7 +44,7 @@ A lightweight command-line interface for ChatGPT on macOS, powered by the OpenAI
 ### Interactive mode
 
 ```
-$ chatgpt
+$ chatgpt-cli
 Hi Thomas, How can I help you?
 Model: gpt-5.4-mini | Type q to quit
 
@@ -54,7 +54,7 @@ Model: gpt-5.4-mini | Type q to quit
 ### One-shot mode
 
 ```
-$ chatgpt "What is today's date?"
+$ chatgpt-cli "What is today's date?"
 Today is April 9, 2026.
 ```
 

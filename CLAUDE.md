@@ -10,10 +10,10 @@ A single-file Python CLI client for ChatGPT using the OpenAI Responses API with 
 
 ```bash
 # Interactive mode
-./chatgpt
+./chatgpt-cli
 
 # One-shot query
-./chatgpt "your question here"
+./chatgpt-cli "your question here"
 ```
 
 ## Dependencies
@@ -31,7 +31,7 @@ Install: `pip3 install -r requirements.txt`
 
 ## Architecture
 
-Single executable script (`chatgpt`) with no module structure:
+Single executable script (`chatgpt-cli`) with no module structure:
 - `load_env()` — parses `~/.env`, always overrides existing env vars
 - `get_response_text()` — extracts text content from the Responses API output
 - `build_input()` — constructs the input array from conversation history

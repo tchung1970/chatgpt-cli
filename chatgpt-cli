@@ -96,8 +96,7 @@ def chat():
                 console.print("[dim]Conversation cleared.[/]\n")
                 continue
             elif cmd == "/help":
-                console.print("[dim]/clear  - Reset conversation")
-                console.print("/model  - Show current model[/]\n")
+                console.print("[dim]/clear  - Reset conversation\n/model  - Show current model[/]\n")
                 continue
             elif cmd == "/model":
                 console.print(f"[dim]Model: {MODEL}[/]\n")

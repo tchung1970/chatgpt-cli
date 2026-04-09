@@ -33,9 +33,12 @@ Install: `pip3 install -r requirements.txt`
 
 Single executable script (`chatgpt-cli`) with no module structure:
 - `load_env()` — parses `~/.env`, always overrides existing env vars
+- `get_user_name()` — loads or prompts for first name, saved to `~/.chatgpt-cli.json`
 - `get_response_text()` — extracts text content from the Responses API output
 - `build_input()` — constructs the input array from conversation history
 - `chat()` — interactive REPL with readline support, responses rendered as markdown
 - `__main__` block — routes between one-shot mode (args present) and interactive mode
+
+Interactive commands: `q`/`quit`/`exit` to quit, `/clear` to reset conversation, `/model` to show model, `/help` for help.
 
 Uses the OpenAI **Responses API** (`client.responses.create`) with `web_search_preview` tool for live internet access.

@@ -76,6 +76,8 @@ $ chatgpt "What's the weather in Los Angeles?"
 
 Environment variables are loaded from `~/.env` at startup.
 
+On first run, you will be prompted to enter your first name. This is saved to `~/.chatgpt-cli.json` and used for the greeting.
+
 ## License
 
 This project is open source and available under the [MIT License](LICENSE).

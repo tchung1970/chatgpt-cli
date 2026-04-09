@@ -45,6 +45,7 @@ A lightweight command-line interface for ChatGPT on macOS, powered by the OpenAI
 
 ```
 $ chatgpt
+Enter your first name: Thomas
 Hi Thomas, How can I help you?
 Model: gpt-5.4-mini | Type q to quit
 

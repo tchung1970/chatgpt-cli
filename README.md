@@ -44,7 +44,7 @@ A lightweight command-line interface for ChatGPT on macOS, powered by the OpenAI
 ### Interactive mode
 
 ```
-$ chatgpt-cli
+$ chatgpt
 Hi Thomas, How can I help you?
 Model: gpt-5.4-mini | Type q to quit
 
@@ -54,7 +54,7 @@ Model: gpt-5.4-mini | Type q to quit
 ### One-shot mode
 
 ```
-$ chatgpt-cli "What is today's date?"
+$ chatgpt "What is today's date?"
 Today is April 9, 2026.
 ```
 

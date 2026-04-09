@@ -65,7 +65,7 @@ $ chatgpt "What's the weather in Los Angeles?"
 
 | Command  | Description           |
 |----------|-----------------------|
-| `q`      | Quit                  |
+| `q` / `quit` / `exit` | Quit |
 | `/clear` | Reset conversation    |
 | `/model` | Show current model    |
 | `/help`  | List available commands |

@@ -72,7 +72,7 @@ def chat():
 
     name = get_user_name()
     console.print(f"[bold green]Hi {name}, How can I help you?[/]")
-    console.print(f"[dim]Model: {MODEL} | Type q to quit[/]\n")
+    console.print(f"[dim]Model: {MODEL} | Type q, quit, or exit to quit[/]\n")
 
     while True:
         try:
@@ -84,7 +84,7 @@ def chat():
         if not user_input:
             continue
 
-        if user_input.lower() == "q":
+        if user_input.lower() in ("q", "quit", "exit"):
             console.print("[dim]Goodbye![/]")
             break
 

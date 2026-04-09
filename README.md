@@ -43,7 +43,7 @@ A lightweight command-line interface for ChatGPT on macOS, powered by the OpenAI
 
 ### Interactive mode
 
-On first run, you will be prompted to enter your first name.
+On first run, you will be prompted to enter your first name.<br>
 This is saved to `~/.chatgpt-cli.json` and used for the greeting.
 
 ```

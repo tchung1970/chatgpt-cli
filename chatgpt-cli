@@ -91,17 +91,13 @@ def chat():
         # Commands
         if user_input.startswith("/"):
             cmd = user_input.lower()
-            if cmd in ("/quit", "/exit", "/q"):
-                console.print("[dim]Goodbye![/]")
-                break
-            elif cmd == "/clear":
+            if cmd == "/clear":
                 history = [{"role": "system", "content": SYSTEM_PROMPT}]
                 console.print("[dim]Conversation cleared.[/]\n")
                 continue
             elif cmd == "/help":
                 console.print("[dim]/clear  - Reset conversation")
-                console.print("/model  - Show current model")
-                console.print("/quit   - Exit[/]\n")
+                console.print("/model  - Show current model[/]\n")
                 continue
             elif cmd == "/model":
                 console.print(f"[dim]Model: {MODEL}[/]\n")

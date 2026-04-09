@@ -69,7 +69,6 @@ $ chatgpt "What's the weather in Los Angeles?"
 | `/clear` | Reset conversation    |
 | `/model` | Show current model    |
 | `/help`  | List available commands |
-| `/quit`  | Quit                  |
 
 ## Configuration
 

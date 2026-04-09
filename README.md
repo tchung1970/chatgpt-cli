@@ -36,7 +36,7 @@ A lightweight command-line interface for ChatGPT on macOS, powered by the OpenAI
 4. Make the script executable and optionally add it to your PATH:
    ```bash
    chmod +x chatgpt-cli
-   ln -s "$(pwd)/chatgpt-cli" /usr/local/bin/chatgpt-cli
+   ln -sf "$(pwd)/chatgpt-cli" ~/bin/chatgpt
    ```
 
 ## Usage

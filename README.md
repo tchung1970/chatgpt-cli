@@ -54,8 +54,7 @@ Model: gpt-5.4-mini | Type q to quit
 ### One-shot mode
 
 ```
-$ chatgpt "What is today's date?"
-Today is April 9, 2026.
+$ chatgpt "What's the weather in Los Angeles?"
 ```
 
 ### Commands

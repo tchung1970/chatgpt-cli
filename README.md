@@ -78,4 +78,4 @@ Environment variables are loaded from `~/.env` at startup.
 
 ## License
 
-MIT
+This project is open source and available under the [MIT License](LICENSE).

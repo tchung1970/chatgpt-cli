@@ -1,0 +1,135 @@
+#!/usr/bin/env python3
+"""CLI ChatGPT client for macOS with web search."""
+
+import os
+import sys
+import readline
+from pathlib import Path
+
+from openai import OpenAI
+from rich.console import Console
+from rich.markdown import Markdown
+
+# Load API key from ~/.env
+def load_env():
+    env_file = Path.home() / ".env"
+    if env_file.exists():
+        for line in env_file.read_text().splitlines():
+            line = line.strip()
+            if line and not line.startswith("#") and "=" in line:
+                key, _, value = line.partition("=")
+                os.environ[key.strip()] = value.strip()
+
+load_env()
+
+client = OpenAI()
+console = Console()
+
+MODEL = os.environ.get("CHATGPT_MODEL", "gpt-5.4-mini")
+SYSTEM_PROMPT = "You are a helpful assistant."
+TOOLS = [{"type": "web_search_preview"}]
+
+
+def get_response_text(response):
+    """Extract text from a Responses API response."""
+    text = ""
+    for item in response.output:
+        if item.type == "message":
+            for part in item.content:
+                if part.type == "output_text":
+                    text += part.text
+    return text
+
+
+def build_input(history, user_msg):
+    """Build input for the Responses API from conversation history."""
+    inputs = []
+    for msg in history:
+        inputs.append(msg)
+    inputs.append({"role": "user", "content": user_msg})
+    return inputs
+
+
+def chat():
+    history = [{"role": "system", "content": SYSTEM_PROMPT}]
+
+    console.print("[bold green]Hi Thomas, How can I help you?[/]")
+    console.print(f"[dim]Model: {MODEL} | Type q to quit[/]\n")
+
+    while True:
+        try:
+            user_input = input("> ").strip()
+        except (KeyboardInterrupt, EOFError):
+            console.print("\n[dim]Goodbye![/]")
+            break
+
+        if not user_input:
+            continue
+
+        if user_input.lower() == "q":
+            console.print("[dim]Goodbye![/]")
+            break
+
+        # Commands
+        if user_input.startswith("/"):
+            cmd = user_input.lower()
+            if cmd in ("/quit", "/exit", "/q"):
+                console.print("[dim]Goodbye![/]")
+                break
+            elif cmd == "/clear":
+                history = [{"role": "system", "content": SYSTEM_PROMPT}]
+                console.print("[dim]Conversation cleared.[/]\n")
+                continue
+            elif cmd == "/help":
+                console.print("[dim]/clear  - Reset conversation")
+                console.print("/model  - Show current model")
+                console.print("/quit   - Exit[/]\n")
+                continue
+            elif cmd == "/model":
+                console.print(f"[dim]Model: {MODEL}[/]\n")
+                continue
+
+        inputs = build_input(history, user_input)
+
+        try:
+            console.print()
+            with console.status("[bold cyan]Thinking...", spinner="dots"):
+                response = client.responses.create(
+                    model=MODEL,
+                    input=inputs,
+                    tools=TOOLS,
+                )
+
+            response_text = get_response_text(response)
+            history.append({"role": "user", "content": user_input})
+            history.append({"role": "assistant", "content": response_text})
+            console.print(Markdown(response_text))
+            console.print()
+
+        except Exception as e:
+            console.print(f"[bold red]Error:[/] {e}\n")
+
+    return
+
+
+if __name__ == "__main__":
+    # Allow one-shot mode: chatgpt "question here"
+    if len(sys.argv) > 1:
+        query = " ".join(sys.argv[1:])
+        inputs = [
+            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "user", "content": query},
+        ]
+        try:
+            response = client.responses.create(
+                model=MODEL,
+                input=inputs,
+                tools=TOOLS,
+            )
+            text = get_response_text(response)
+            console.print(Markdown(text))
+        except Exception as e:
+            console.print(f"[bold red]Error:[/] {e}")
+            sys.exit(1)
+    else:
+        chat()

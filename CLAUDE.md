@@ -39,7 +39,7 @@ Single executable script (`chatgpt-cli`) with no module structure:
 - `chat()` — interactive REPL with readline support, responses rendered as markdown
 - `__main__` block — routes between one-shot mode (args present) and interactive mode
 
-Interactive commands: `q`/`quit`/`exit` to quit, `/clear` to reset conversation, `/model` to show model, `/paste` for multi-line input mode (end with `/end`), `/help` for help.
+Interactive commands: `/quit` (or `q`) to quit, `/clear` to reset conversation, `/model` to show model, `/paste` for multi-line input mode (end with `/end`), `/help` for help.
 
 Multi-line input: paste detection auto-captures multi-line pastes (displays as `[Pasted text +N lines]` and prompts for follow-up), backslash `\` at end of line continues input, and `/paste` enters manual multi-line mode (submit with `/end`).
 

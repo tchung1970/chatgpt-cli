@@ -71,7 +71,7 @@ You can also use `\` at the end of a line to continue on the next line, or type 
 
 | Command  | Description           |
 |----------|-----------------------|
-| `q` / `quit` / `exit` | Quit |
+| `/quit`  | Quit (or just `q`)    |
 | `/clear` | Reset conversation    |
 | `/model` | Show current model    |
 | `/paste` | Manual multi-line input mode (end with `/end`) |

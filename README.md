@@ -65,7 +65,7 @@ $ chatgpt "What's the weather in Los Angeles?"
 
 Paste multi-line text (e.g. email headers, code) directly at the `>` prompt — it is automatically detected and displayed as `[Pasted text +N lines]`. You then get a second `>` prompt to type your question before submitting.
 
-You can also use `\` at the end of a line to continue on the next line, or type `"""` to enter manual multi-line mode.
+You can also use `\` at the end of a line to continue on the next line, or type `/paste` to enter manual multi-line mode (end with `/end`).
 
 ### Commands
 
@@ -74,9 +74,9 @@ You can also use `\` at the end of a line to continue on the next line, or type 
 | `q` / `quit` / `exit` | Quit |
 | `/clear` | Reset conversation    |
 | `/model` | Show current model    |
+| `/paste` | Manual multi-line input mode (end with `/end`) |
 | `/help`  | List available commands |
 | `\`      | Continue input on next line |
-| `"""`    | Manual multi-line input mode |
 
 ## Configuration
 

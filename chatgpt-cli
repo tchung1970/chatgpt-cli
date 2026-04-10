@@ -122,14 +122,14 @@ def chat():
             except (KeyboardInterrupt, EOFError):
                 pass
 
-        # Manual multi-line input mode: start with """ and end with """
-        if user_input == '"""':
-            console.print("[dim]Multi-line mode. Paste your text, then type \"\"\" to submit.[/]")
+        # Manual multi-line input mode: /paste to enter, /end to submit
+        if user_input.lower() == "/paste":
+            console.print("[dim]Multi-line mode. Type your text, then /end to submit.[/]")
             lines = []
             try:
                 while True:
                     line = input("... ")
-                    if line.strip() == '"""':
+                    if line.strip().lower() == "/end":
                         break
                     lines.append(line)
             except (KeyboardInterrupt, EOFError):
@@ -152,7 +152,7 @@ def chat():
                 console.print("[dim]Conversation cleared.[/]\n")
                 continue
             elif cmd == "/help":
-                console.print("[dim]/clear  - Reset conversation\n/model  - Show current model\n\\\\      - Continue input on next line\n\"\"\"    - Multi-line input mode[/]\n")
+                console.print("[dim]/clear  - Reset conversation\n/model  - Show current model\n/paste  - Multi-line input mode\n\\\\      - Continue input on next line[/]\n")
                 continue
             elif cmd == "/model":
                 console.print(f"[dim]Model: {MODEL}[/]\n")

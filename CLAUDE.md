@@ -41,4 +41,6 @@ Single executable script (`chatgpt-cli`) with no module structure:
 
 Interactive commands: `q`/`quit`/`exit` to quit, `/clear` to reset conversation, `/model` to show model, `/help` for help.
 
+Multi-line input: paste detection auto-captures multi-line pastes (displays as `[Pasted text +N lines]` and prompts for follow-up), backslash `\` at end of line continues input, and `"""` toggles manual multi-line mode.
+
 Uses the OpenAI **Responses API** (`client.responses.create`) with `web_search_preview` tool for live internet access.

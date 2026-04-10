@@ -61,6 +61,12 @@ Model: gpt-5.4-mini | Type q to quit
 $ chatgpt "What's the weather in Los Angeles?"
 ```
 
+### Multi-line input
+
+Paste multi-line text (e.g. email headers, code) directly at the `>` prompt — it is automatically detected and displayed as `[Pasted text +N lines]`. You then get a second `>` prompt to type your question before submitting.
+
+You can also use `\` at the end of a line to continue on the next line, or type `"""` to enter manual multi-line mode.
+
 ### Commands
 
 | Command  | Description           |
@@ -69,6 +75,8 @@ $ chatgpt "What's the weather in Los Angeles?"
 | `/clear` | Reset conversation    |
 | `/model` | Show current model    |
 | `/help`  | List available commands |
+| `\`      | Continue input on next line |
+| `"""`    | Manual multi-line input mode |
 
 ## Configuration
 

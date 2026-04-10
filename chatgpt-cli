@@ -3,7 +3,9 @@
 
 import json
 import os
+import select
 import sys
+import termios
 import readline
 from pathlib import Path
 
@@ -22,6 +24,9 @@ def load_env():
                 os.environ[key.strip()] = value.strip()
 
 load_env()
+
+# Disable bracketed paste — libedit on macOS doesn't handle it properly
+readline.parse_and_bind("set enable-bracketed-paste off")
 
 client = OpenAI()
 console = Console()
@@ -81,6 +86,57 @@ def chat():
             console.print("\n[dim]Goodbye![/]")
             break
 
+        # Backslash continuation: line ending with \ prompts for more
+        while user_input.endswith("\\"):
+            user_input = user_input[:-1]
+            try:
+                user_input += "\n" + input("... ")
+            except (KeyboardInterrupt, EOFError):
+                break
+
+        # Auto-detect pasted multi-line input via raw fd reads
+        fd = sys.stdin.fileno()
+        extra_chunks = []
+        while select.select([fd], [], [], 0.15)[0]:
+            chunk = os.read(fd, 65536)
+            if not chunk:
+                break
+            extra_chunks.append(chunk.decode())
+        if extra_chunks:
+            extra_raw = "".join(extra_chunks)
+            user_input = user_input + "\n" + extra_raw.rstrip("\n")
+            total_lines = user_input.count("\n") + 1
+            # Flush any remaining stdin data from the paste
+            termios.tcflush(fd, termios.TCIFLUSH)
+            # Move cursor up past all echoed lines and clear to end of screen
+            echo_lines = extra_raw.count("\n") + 1
+            for _ in range(echo_lines):
+                sys.stdout.write("\x1b[A")
+            sys.stdout.write(f"\r\x1b[2K> [Pasted text +{total_lines} lines]\x1b[J\n")
+            sys.stdout.flush()
+            # Prompt for additional input before submitting
+            try:
+                additional = input("> ").strip()
+                if additional:
+                    user_input = user_input + "\n" + additional
+            except (KeyboardInterrupt, EOFError):
+                pass
+
+        # Manual multi-line input mode: start with """ and end with """
+        if user_input == '"""':
+            console.print("[dim]Multi-line mode. Paste your text, then type \"\"\" to submit.[/]")
+            lines = []
+            try:
+                while True:
+                    line = input("... ")
+                    if line.strip() == '"""':
+                        break
+                    lines.append(line)
+            except (KeyboardInterrupt, EOFError):
+                console.print("\n[dim]Multi-line input cancelled.[/]")
+                continue
+            user_input = "\n".join(lines).strip()
+
         if not user_input:
             continue
 
@@ -96,7 +152,7 @@ def chat():
                 console.print("[dim]Conversation cleared.[/]\n")
                 continue
             elif cmd == "/help":
-                console.print("[dim]/clear  - Reset conversation\n/model  - Show current model[/]\n")
+                console.print("[dim]/clear  - Reset conversation\n/model  - Show current model\n\\\\      - Continue input on next line\n\"\"\"    - Multi-line input mode[/]\n")
                 continue
             elif cmd == "/model":
                 console.print(f"[dim]Model: {MODEL}[/]\n")

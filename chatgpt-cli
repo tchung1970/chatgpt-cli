@@ -140,7 +140,7 @@ def chat():
         if not user_input:
             continue
 
-        if user_input.lower() == "q":
+        if user_input.lower() in ("q", "exit"):
             console.print("[dim]Goodbye![/]")
             break
 
@@ -155,7 +155,7 @@ def chat():
                 console.print("[dim]Conversation cleared.[/]\n")
                 continue
             elif cmd == "/help":
-                console.print("[dim]/quit   - Quit (or just q)\n/clear  - Reset conversation\n/model  - Show current model\n/paste  - Multi-line input mode\n\\\\      - Continue input on next line[/]\n")
+                console.print("[dim]/quit   - Quit (or q / exit)\n/clear  - Reset conversation\n/model  - Show current model\n/paste  - Multi-line input mode\n\\\\      - Continue input on next line[/]\n")
                 continue
             elif cmd == "/model":
                 console.print(f"[dim]Model: {MODEL}[/]\n")
